@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const Users = require('../models/Users');
 const path = require('path');
@@ -22,7 +23,11 @@ router.get('/', async (req, res) => {
             message: err
         });
     }
-})
+});
+
+router.get('/register', (req, res) => {
+    res.sendFile(path.resolve('public/signUp.html'))
+});
 
 router.post('/login', async (req, res) => {
     let login = req.body.userName;
@@ -42,24 +47,31 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
-
-    console.log(req.body.userName);
-    console.log(req.body.password);
+router.post('/', (req, res) => {
 
     const user = new Users({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         userName: req.body.userName,
-        password: req.body.password
-
+        password: req.body.password,
     });
-    try {
-        const savedUser = await user.save();
-        res.json(savedUser);
-    } catch (err) {
-        res.json({
-            message: err
+    bcrypt.genSalt(10, (err, salt)=> {
+        bcrypt.hash(user.password, salt, (err, hash)=>{
+            if (err) {
+                console.log(err);    
+            }
+            user.password = hash;
+            user.save(function(err){
+                if (err) {
+                    console.log(err);
+                    return;
+                }else{
+                    res.sendFile(path.resolve('public/index.html'));
+                }
+            })
         });
-    }
+    });
+
 })
 
 module.exports = router;

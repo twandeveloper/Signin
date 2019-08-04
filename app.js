@@ -26,7 +26,7 @@ app.post('/', (req, res)=>{
     
 });
 mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true},()=> console.log('connected to database')
+mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true},()=> console.log('connected to Mongo database')
 )
 
 app.listen(3000, ()=>{
