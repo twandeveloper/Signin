@@ -2,52 +2,63 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const Users = require('../models/Users');
+const path = require('path');
 const app = express();
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
 
 
-router.get('/', async (req, res)=>{
-    
+router.get('/', async (req, res) => {
+
     try {
         const users = await Users.find();
         console.log(login);
-        
+
         res.json(users)
     } catch (err) {
-        res.json({message:err});
+        res.json({
+            message: err
+        });
     }
 })
 
-router.post('/login', async (req, res)=> {
+router.post('/login', async (req, res) => {
     let login = req.body.userName;
+    let passkey = req.body.password;
     try {
-        const users = await Users.find();
-        users.forEach(name =>{
-            if (login === name.userName) {
-                console.log('login Sucessful');
-                res.send('Logging in')
-            }
-            
-        }); 
-    } catch (err) {
-        
-    }
-})
+        const users = await Users.findOne({
+            UserName: login,
+            password: passkey
+        }, () => {
 
-router.post('/', async (req, res)=>{
+            res.sendFile(path.resolve('public/members.html'));
+
+        });
+
+    } catch (err) {
+
+    }
+});
+
+router.post('/', async (req, res) => {
 
     console.log(req.body.userName);
-    
+    console.log(req.body.password);
+
     const user = new Users({
-        userName: req.body.userName
-        
+        userName: req.body.userName,
+        password: req.body.password
+
     });
     try {
         const savedUser = await user.save();
-        res.json(savedUser);        
+        res.json(savedUser);
     } catch (err) {
-        res.json({message: err});
+        res.json({
+            message: err
+        });
     }
 })
 

@@ -18,14 +18,14 @@ app.use('/user', userRoutes);
 
 //ROUTES
 app.get('/', (req, res) =>{
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(__dirname + '/index.html');    
 });
 
 app.post('/', (req, res)=>{
     
     
 });
-
+mongoose.set('useCreateIndex', true);
 mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true},()=> console.log('connected to database')
 )
 
