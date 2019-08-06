@@ -70,4 +70,10 @@ router.post('/login', (req, res, next) => {
 
 });
 
+//logOut Handle
+    router.get('/logout', (req, res)=>{
+        req.logout();
+        req.flash('succes_msg', "yoi are logged out");
+        res.sendFile(path.resolve('public/in.html'));
+});
 module.exports = router;

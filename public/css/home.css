@@ -14,3 +14,7 @@ button{
 .select{
     width: 100%;
 }
+
+.card{
+    margin: 40% auto;
+}

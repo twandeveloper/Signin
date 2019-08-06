@@ -13,22 +13,24 @@
 
 <body>
     <div class="container-fluid">
-        <div class="container">
-            <div class="row justify-content-around">
-                <div class="col-12 text-center">
-                    <h1>Sign In</h1>
-                </div>
+        <div class="row justify-content-between">
+            <div class="col-md-6 m-auto">
+                <div class="card card-body text-center">
+                    <span style="font-size: 15vw";>
+                        <i class="fas fa-sign-in-alt"></i>
+                    </span>
                     <form action="/user/login" method="POST" class="entry row">
-                        <div class="col-xs-12 col-md-6 form-group text-center">
-                            <label class="text-align-center" for="">User Name</label>
-                            <input type="text" class="form-control" name="username">
-                        </div>
-                        <div class="col-xs-12 col-md-6 form-group text-center">
-                            <label class="text-align-center" for="">password</label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
+
+                        <label class="text-align-center" for="">User Name</label>
+                        <input type="text" class="form-control" name="username">
+
+
+                        <label class="text-align-center" for="">password</label>
+                        <input type="password" class="form-control" name="password">
+
                         <button type="submit">Submit</button>
                     </form>
+                </div>
             </div>
         </div>
     </div>
