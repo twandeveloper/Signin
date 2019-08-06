@@ -1,0 +1,16 @@
+h1{
+    font-size: 4vw;
+} 
+
+/* input{
+    border: 1px solid black;
+    margin: 10px auto;
+} */
+
+button{
+    margin: 4px 0;
+}
+
+.select{
+    width: 100%;
+}

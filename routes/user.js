@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
 const Users = require('../models/Users');
+const passport = require('passport');
 const path = require('path');
 const app = express();
 
@@ -29,49 +30,44 @@ router.get('/register', (req, res) => {
     res.sendFile(path.resolve('public/signUp.html'))
 });
 
-router.post('/login', async (req, res) => {
-    let login = req.body.userName;
-    let passkey = req.body.password;
-    try {
-        const users = await Users.findOne({
-            UserName: login,
-            password: passkey
-        }, () => {
 
-            res.sendFile(path.resolve('public/members.html'));
-
-        });
-
-    } catch (err) {
-
-    }
-});
-
+// register new user to database and excrypts password
 router.post('/', (req, res) => {
-
     const user = new Users({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        userName: req.body.userName,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username: req.body.username,
         password: req.body.password,
     });
-    bcrypt.genSalt(10, (err, salt)=> {
-        bcrypt.hash(user.password, salt, (err, hash)=>{
+    bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(user.password, salt, (err, hash) => {
             if (err) {
-                console.log(err);    
+                console.log(err);
             }
             user.password = hash;
-            user.save(function(err){
+            user.save(function (err) {
                 if (err) {
                     console.log(err);
                     return;
-                }else{
+                } else {
                     res.sendFile(path.resolve('public/index.html'));
                 }
             })
         });
     });
+});
 
+router.get('/login', (req, res) =>{
+    res.sendFile(path.resolve('public/in.html'));
 })
+
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/test',
+        failureRedirect: '/user/login',
+        failureFlash: true
+    })(req, res, next);
+
+});
 
 module.exports = router;
