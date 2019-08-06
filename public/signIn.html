@@ -8,7 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/signIn.css">
 </head>
 
 <body>
@@ -16,19 +16,17 @@
         <div class="row justify-content-between">
             <div class="col-md-6 m-auto">
                 <div class="card card-body text-center">
-                    <span style="font-size: 15vw";>
-                        <i class="fas fa-sign-in-alt"></i>
-                    </span>
                     <form action="/user/login" method="POST" class="entry row">
 
-                        <label class="text-align-center" for="">User Name</label>
+                        <label class="text-align-center col-sm-12 control-label" for="">User Name</label>
                         <input type="text" class="form-control" name="username">
 
-
-                        <label class="text-align-center" for="">password</label>
+                        
+                        <label class="text-align-center col-sm-12 control-label" for="">password</label>
                         <input type="password" class="form-control" name="password">
 
-                        <button type="submit">Submit</button>
+
+                        <button class="btn btn-primary col-sm col-md-6" type="submit">Submit</button>
                     </form>
                 </div>
             </div>

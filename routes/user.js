@@ -58,13 +58,13 @@ router.post('/', (req, res) => {
 });
 
 router.get('/login', (req, res) =>{
-    res.sendFile(path.resolve('public/in.html'));
+    res.sendFile(path.resolve('public/signIn.html'));
 })
 
 router.post('/login', (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/test',
-        failureRedirect: '/user/login',
+        failureRedirect: '/',
         failureFlash: true
     })(req, res, next);
 
@@ -74,6 +74,6 @@ router.post('/login', (req, res, next) => {
     router.get('/logout', (req, res)=>{
         req.logout();
         req.flash('succes_msg', "yoi are logged out");
-        res.sendFile(path.resolve('public/in.html'));
+        res.sendFile(path.resolve('public/index.html'));
 });
 module.exports = router;
