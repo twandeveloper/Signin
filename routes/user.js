@@ -27,7 +27,7 @@ router.get('/', async (req, res) => {
 });
 
 router.get('/register', (req, res) => {
-    res.sendFile(path.resolve('public/signUp.html'))
+    res.render('register');
 });
 
 
@@ -58,7 +58,7 @@ router.post('/', (req, res) => {
 });
 
 router.get('/login', (req, res) =>{
-    res.sendFile(path.resolve('public/signIn.html'));
+    res.render('login');
 })
 
 router.post('/login', (req, res, next) => {
